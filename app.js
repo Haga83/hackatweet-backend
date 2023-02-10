@@ -20,6 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', usersRouter);
-app.use('tweets', tweetsRouter);
+app.use('/tweets', tweetsRouter);
 
 module.exports = app;
