@@ -39,7 +39,7 @@ router.get("/all/:token", (req, res) => {
     }
 
     Tweet.find() // Find all tweets
-      .populate("user", ["username", "firstName"])
+      .populate("user", ["username", "firstname"])
       .populate("likes", ["username"])
       .sort({ createdAt: "desc" })
       .then((tweets) => {
