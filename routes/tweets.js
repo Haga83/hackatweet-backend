@@ -48,7 +48,6 @@ router.get("/all/:token", (req, res) => {
   });
 });
 
-
 // Get all tweets from a specific user
 router.get("/trends/:token", (req, res) => {
   User.findOne({ token: req.params.token }).then((user) => {
@@ -87,7 +86,6 @@ router.get("/trends/:token", (req, res) => {
   });
 });
 
-
 // Get all hashtags
 router.get("/hashtag/:token/:query", (req, res) => {
   User.findOne({ token: req.params.token }).then((user) => {
@@ -105,7 +103,6 @@ router.get("/hashtag/:token/:query", (req, res) => {
       });
   });
 });
-
 
 // like a tweet
 router.put("/like", (req, res) => {
@@ -143,7 +140,6 @@ router.put("/like", (req, res) => {
   });
 });
 
-
 // Delete a tweet
 router.delete("/", (req, res) => {
   if (!checkBody(req.body, ["token", "tweetId"])) {
@@ -158,12 +154,12 @@ router.delete("/", (req, res) => {
     }
 
     Tweet.findById(req.body.tweetId)
-      .populate("author")
+      .populate("user")
       .then((tweet) => {
         if (!tweet) {
           res.json({ result: false, error: "Tweet not found" });
           return;
-        } else if (String(tweet.author._id) !== String(user._id)) {
+        } else if (String(tweet.user._id) !== String(user._id)) {
           // ObjectId needs to be converted to string (JavaScript cannot compare two objects)
           res.json({
             result: false,
